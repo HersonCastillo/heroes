@@ -1,3 +1,5 @@
+import { API } from './api';
 export const environment = {
-  production: true
+    production: true,
+    ...API.rest
 };

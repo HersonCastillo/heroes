@@ -12,7 +12,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$heroes-primary: mat-palette($mat-indigo);
+
+$heroes-primary: mat-palette($mat-red);
 $heroes-accent: mat-palette($mat-pink, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
@@ -28,5 +29,18 @@ $heroes-theme: mat-light-theme($heroes-primary, $heroes-accent, $heroes-warn);
 
 /* You can add global styles to this file, and also import other style files */
 
+@font-face {
+    font-family: 'Marvel';
+    src: url(/assets/fonts/Marvel-Regular.ttf) format('truetype');
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.div-block {
+    display: flex;
+    flex-direction: row;
+}
+.div-flex {
+    flex: 1 0 auto;
+}
