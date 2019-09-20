@@ -34,8 +34,14 @@ $heroes-theme: mat-light-theme($heroes-primary, $heroes-accent, $heroes-warn);
     src: url(/assets/fonts/Marvel-Regular.ttf) format('truetype');
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+    height: 100%;
+    background-color: #f9f9f9;
+}
+body {
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .div-block {
     display: flex;
@@ -43,4 +49,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 .div-flex {
     flex: 1 0 auto;
+}
+.full-w{
+    width: 100%;
+}
+.full-h{
+    height: 100%;
+}
+.float-container {
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    position: absolute;
 }

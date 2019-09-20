@@ -1,7 +1,6 @@
 export const API = {
     rest: {
-        baseurl: 'http://gateway.marvel.com',
-        commonpath: '/v1/public',
+        baseurl: 'http://gateway.marvel.com/v1/public',
         user: {
             name: 'herson8827800',
             key: {
@@ -11,6 +10,6 @@ export const API = {
         },
         envhash: '3825572dd1acd13e93daccc317cd366f',
         ts: 1,
-        imagecompress: 'https://i1.wp.com/'
+        imagecompress: 'https://i1.wp.com'
     }
 }
