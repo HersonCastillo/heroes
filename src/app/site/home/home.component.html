@@ -2,21 +2,90 @@
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 </div>
 <div [@opacityFrameTransform]="isLoaded ? 'show' : 'hide'">
-    <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start"
-        class="container-wrap">
-        <ng-template *ngFor="let character of characters" [ngIf]="true">
-            <mat-card fxFlex="0 1 calc(16.66% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%" class="mat-elevation-z4">
-                <mat-card-header>
-                    <mat-card-title>
-                        {{elipsis(character.name, 10)}}
-                    </mat-card-title>
-                </mat-card-header>
-                <img mat-card-image [src]="getImage(character)"
-                    [alt]="character.name" style="height: 245px;">
-                <mat-card-actions>
-                    <button mat-stroked-button style="width: 100%;">I want to be like him!</button>
-                </mat-card-actions>
-            </mat-card>
-        </ng-template>
-    </div>
+    <mat-tab-group dynamicHeight class="tab-container">
+        <mat-tab label="Characters">
+            <!--Characters-->
+            <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start"
+                class="container-wrap">
+                <mat-toolbar class="container-wrap-title mat-elevation-z2">
+                    <span>Most powerful characters</span>
+                    <div class="div-flex"></div>
+                    <button mat-stroked-button color="primary">
+                        More information
+                    </button>
+                </mat-toolbar>
+                <ng-template *ngFor="let character of characters" [ngIf]="true">
+                    <mat-card fxFlex="0 1 calc(16.66% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%"
+                        class="mat-elevation-z4">
+                        <mat-card-header>
+                            <mat-card-title>
+                                {{elipsis(character.name, 10)}}
+                            </mat-card-title>
+                        </mat-card-header>
+                        <img mat-card-image [src]="getImage(character)" [alt]="character.name" style="height: 245px;">
+                        <mat-card-actions>
+                            <button mat-stroked-button style="width: 100%;">I want to be like him!</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </ng-template>
+            </div>
+            <br>
+        </mat-tab>
+        <mat-tab label="Comics">
+            <!--Comics-->
+            <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start"
+                class="container-wrap">
+                <mat-toolbar class="container-wrap-title mat-elevation-z2">
+                    <span>Best entertainment comics</span>
+                    <div class="div-flex"></div>
+                    <button mat-stroked-button color="primary">
+                        More information
+                    </button>
+                </mat-toolbar>
+                <ng-template *ngFor="let comic of comics" [ngIf]="true">
+                    <mat-card fxFlex="0 1 calc(16.66% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%"
+                        class="mat-elevation-z4">
+                        <mat-card-header>
+                            <mat-card-title>
+                                {{elipsis(comic.title, 10)}}
+                            </mat-card-title>
+                        </mat-card-header>
+                        <img mat-card-image [src]="getImage(comic)" [alt]="comic.title" style="height: 245px;">
+                        <mat-card-actions>
+                            <button mat-stroked-button style="width: 100%;">I need know more!</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </ng-template>
+            </div>
+            <br>
+        </mat-tab>
+        <mat-tab label="Stories">
+                <!--Stores-->
+                <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start"
+                    class="container-wrap">
+                    <mat-toolbar class="container-wrap-title mat-elevation-z2">
+                        <span>Best entertainment stories</span>
+                        <div class="div-flex"></div>
+                        <button mat-stroked-button color="primary">
+                            More information
+                        </button>
+                    </mat-toolbar>
+                    <ng-template *ngFor="let storie of stories" [ngIf]="true">
+                        <mat-card fxFlex="0 1 calc(16.66% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%"
+                            class="mat-elevation-z4">
+                            <mat-card-header>
+                                <mat-card-title>
+                                    {{elipsis(storie.title, 10)}}
+                                </mat-card-title>
+                            </mat-card-header>
+                            <img mat-card-image [src]="getImage(storie)" [alt]="storie.title" style="height: 245px;">
+                            <mat-card-actions>
+                                <button mat-stroked-button style="width: 100%;">I need know more!</button>
+                            </mat-card-actions>
+                        </mat-card>
+                    </ng-template>
+                </div>
+                <br>
+            </mat-tab>
+    </mat-tab-group>
 </div>

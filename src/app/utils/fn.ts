@@ -20,4 +20,11 @@ export class Fn {
         }
         return url;
     }
+    public static propertyExist(propertyVariable: any, propertyChildName: string): boolean {
+        if(propertyVariable != undefined && propertyVariable != null){
+            let result: any = propertyVariable[propertyChildName];
+            return result != undefined && result != null;
+        }
+        return false;
+    }
 }

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Fn } from 'src/app/utils/fn';
+import { Comic } from 'src/app/interfaces/comic';
+import { Storie } from 'src/app/interfaces/storie';
 import { animations } from 'src/app/utils/animations';
-import { ComicsService } from 'src/app/services/comics.service';
-import { CharactersService } from 'src/app/services/characters.service';
-
 import { Character } from 'src/app/interfaces/character';
+import { ComicsService } from 'src/app/services/comics.service';
+import { StoriesService } from 'src/app/services/stories.service';
+import { CharactersService } from 'src/app/services/characters.service';
 
 @Component({
     selector: 'app-home',
@@ -15,23 +17,43 @@ import { Character } from 'src/app/interfaces/character';
 export class HomeComponent implements OnInit {
     constructor(
         private characterProvider: CharactersService,
-        private comicProvider: ComicsService
+        private comicProvider: ComicsService,
+        private storieProvider: StoriesService
     ){}
-    public isLoaded: boolean = false;
-    public characters: Character[] = [];
+    public isLoadedModules = {
+        characters: false,
+        stories: false,
+        comics: false
+    }
 
+    public characters: Character[] = [];
+    public stories: Storie[] = [];
+    public comics: Comic[] = [];
+
+    get isLoaded(): boolean {
+        return this.isLoadedModules.characters && this.isLoadedModules.comics && this.isLoadedModules.stories;
+    }
     ngOnInit(){
-        window.onload = () => {
-            this.characterProvider.getCharacters(6, 0).subscribe(r => {
-                this.characters = r.data.results;
-                this.isLoaded = true;
-            });
-        }
+        this.characterProvider.getCharacters(12, 0).subscribe(response => {
+            this.characters = response.data.results.slice(0, 6);
+            this.isLoadedModules.characters = true;
+        });
+        this.comicProvider.getComics(12, 0).subscribe(response => {
+            this.comics = response.data.results.slice(0, 6);
+            this.isLoadedModules.comics = true;
+        });
+        this.storieProvider.getStories(12, 0).subscribe(response => {
+            this.stories = response.data.results.slice(0, 6);
+            this.isLoadedModules.stories = true;
+        });
     }
     elipsis(str: string, ln: number): string {
         return Fn.elipsis(str, ln);
     }
-    getImage(character: Character): string {
-        return `${character.thumbnail.path}/portrait_xlarge.${character.thumbnail.extension}`;
+    getImage(val: Character | Comic): string {
+        if(Fn.propertyExist(val, 'thumbnail')){
+            return `${val.thumbnail.path}/portrait_xlarge.${val.thumbnail.extension}`;
+        }
+        return '/assets/img/marvel.png';
     }
 }
