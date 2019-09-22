@@ -5,8 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/material.module';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: '**', redirectTo: '', pathMatch: 'full' }
+    { path: '', component: HomeComponent }
 ]
 
 @NgModule({

@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row class="mat-elevation-z3">
-        <span id="logo">MARVEL</span>
+        <span id="logo" [routerLink]="['/']">MARVEL</span>
         <div class="div-flex"></div>
         <button mat-raised-button class="btn-toolbar" (click)="showMenuForIndex(0)">Characters</button>
         <button mat-raised-button class="btn-toolbar" (click)="showMenuForIndex(1)">Comics</button>
