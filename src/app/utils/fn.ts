@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
     providedIn: 'root'
 })
 export class Fn {
+    constructor(
+        private snack: MatSnackBar
+    ){}
+    public makeSnack(text: string, duration?: number): void {
+        this.snack.open(text, null, { duration: duration || 3500 });
+    }
     public static getPath(path: string): string {
         return `${environment.baseurl}/${path}?apikey=${environment.user.key.public}&ts=${environment.ts}&hash=${environment.envhash}`;
     }

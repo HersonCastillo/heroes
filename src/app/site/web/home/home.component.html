@@ -10,7 +10,7 @@
                 <mat-toolbar class="container-wrap-title mat-elevation-z2">
                     <span>Most powerful characters</span>
                     <div class="div-flex"></div>
-                    <button mat-stroked-button color="primary">
+                    <button mat-stroked-button color="primary" [routerLink]="['/characters']">
                         More information
                     </button>
                 </mat-toolbar>
@@ -23,9 +23,6 @@
                             </mat-card-title>
                         </mat-card-header>
                         <img mat-card-image [src]="getImage(character)" [alt]="character.name" style="height: 245px;">
-                        <mat-card-actions>
-                            <button mat-stroked-button style="width: 100%;">I want to be like him!</button>
-                        </mat-card-actions>
                     </mat-card>
                 </ng-template>
             </div>
@@ -38,7 +35,7 @@
                 <mat-toolbar class="container-wrap-title mat-elevation-z2">
                     <span>Best entertainment comics</span>
                     <div class="div-flex"></div>
-                    <button mat-stroked-button color="primary">
+                    <button mat-stroked-button color="primary" [routerLink]="['/comics']">
                         More information
                     </button>
                 </mat-toolbar>
@@ -51,9 +48,6 @@
                             </mat-card-title>
                         </mat-card-header>
                         <img mat-card-image [src]="getImage(comic)" [alt]="comic.title" style="height: 245px;">
-                        <mat-card-actions>
-                            <button mat-stroked-button style="width: 100%;">I need know more!</button>
-                        </mat-card-actions>
                     </mat-card>
                 </ng-template>
             </div>
@@ -79,9 +73,6 @@
                                 </mat-card-title>
                             </mat-card-header>
                             <img mat-card-image [src]="getImage(storie)" [alt]="storie.title" style="height: 245px;">
-                            <mat-card-actions>
-                                <button mat-stroked-button style="width: 100%;">I need know more!</button>
-                            </mat-card-actions>
                         </mat-card>
                     </ng-template>
                 </div>

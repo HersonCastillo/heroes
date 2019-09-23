@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { ComicsComponent } from './comics.component';
+import { ComicsComponent } from './comics/comics.component';
 
 const routes: Routes = [
     {

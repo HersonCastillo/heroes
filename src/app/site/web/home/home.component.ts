@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterContentInit } from '@angular/core';
 import { Fn } from 'src/app/utils/fn';
 import { Comic } from 'src/app/interfaces/comic';
 import { Storie } from 'src/app/interfaces/storie';
@@ -14,7 +14,7 @@ import { CharactersService } from 'src/app/services/characters.service';
     styleUrls: ['./home.component.scss'],
     animations
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements AfterContentInit {
     constructor(
         private characterProvider: CharactersService,
         private comicProvider: ComicsService,
@@ -33,8 +33,8 @@ export class HomeComponent implements OnInit {
     get isLoaded(): boolean {
         return this.isLoadedModules.characters && this.isLoadedModules.comics && this.isLoadedModules.stories;
     }
-    ngOnInit(){
-        this.characterProvider.getCharacters(12, 0).subscribe(response => {
+    ngAfterContentInit(){
+        this.characterProvider.getCharacters(12, 0, true).subscribe(response => {
             this.characters = response.data.results.slice(0, 6);
             this.isLoadedModules.characters = true;
         });
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
     elipsis(str: string, ln: number): string {
         return Fn.elipsis(str, ln);
     }
-    getImage(val: Character | Comic): string {
+    getImage(val: Character | Comic | Storie): string {
         if(Fn.propertyExist(val, 'thumbnail')){
             return `${val.thumbnail.path}/portrait_xlarge.${val.thumbnail.extension}`;
         }

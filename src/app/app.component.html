@@ -10,16 +10,16 @@
         <div [ngSwitch]="indexMenu" class="full-w">
             <div *ngSwitchCase="0">
                 <div class="div-block">
-                    <button mat-raised-button class="btn-toolbar" [disabled]="!showMenu">Character's comics</button>
-                    <button mat-raised-button class="btn-toolbar" [disabled]="!showMenu">Character's stories</button>
+                    <button mat-raised-button class="btn-toolbar" [routerLink]="['/characters', 'comics']" [disabled]="!showMenu">Character's comics</button>
+                    <button mat-raised-button class="btn-toolbar" [routerLink]="['/characters', 'stories']" [disabled]="!showMenu">Character's stories</button>
                     <div class="div-flex"></div>
                     <span>Characters</span>
                 </div>
             </div>
             <div *ngSwitchCase="1">
                 <div class="div-block">
-                    <button mat-raised-button class="btn-toolbar" [disabled]="!showMenu">Comic's characters</button>
-                    <button mat-raised-button class="btn-toolbar" [disabled]="!showMenu">Comic's stories</button>
+                    <button mat-raised-button class="btn-toolbar" [routerLink]="['/comics', 'characters']" [disabled]="!showMenu">Comic's characters</button>
+                    <button mat-raised-button class="btn-toolbar" [routerLink]="['/comics', 'stories']" [disabled]="!showMenu">Comic's stories</button>
                     <div class="div-flex"></div>
                     <span>Comics</span>
                 </div>

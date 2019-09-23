@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
         AppRoutingModule,
         BrowserAnimationsModule,
         MaterialModule,
-        HttpClientModule
+        HttpClientModule,
+        ScrollingModule
     ],
     providers: [],
     bootstrap: [AppComponent]

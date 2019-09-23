@@ -56,9 +56,29 @@ body {
 .full-h{
     height: 100%;
 }
+.txt-center {
+    text-align: center;
+}
 .float-container {
     transform: translate(-50%, -50%);
     left: 50%;
     top: 50%;
     position: absolute;
+}
+
+::-webkit-scrollbar {
+    width: 11px;
+}
+::-webkit-scrollbar-track {
+    background: transparent; 
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 15px;
+    transition: .2s ease-in-out;
+    -webkit-transition: .2s ease-in-out;
+    -moz-transition: .2s ease-in-out;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #999; 
 }

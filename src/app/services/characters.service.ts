@@ -17,13 +17,18 @@ export class CharactersService {
     private _characters: ServerResponse<Character> = null;
     private paginationStore = {
         limit: 0,
-        offset: 0
+        offset: 0,
+        orderBy: 'name'
     }
 
-    public getCharacters(limit: number, offset: number): Observable<ServerResponse<Character>> {
-        if(this._characters != null && this.paginationStore.limit == limit && this.paginationStore.offset == offset) return of(this._characters);
+    public getCharacters(limit: number, offset: number, ascending: boolean): Observable<ServerResponse<Character>> {
+        if(this._characters != null && this.paginationStore.limit == limit && this.paginationStore.offset == offset && this.valueOfOrderBy == ascending) return of(this._characters);
         this.paginationStore.limit = limit;
         this.paginationStore.offset = offset;
-        return this.http.get<ServerResponse<Character>>(`${this.path}&limit=${limit}&offset=${offset}`).pipe(map(l => l), tap(l => this._characters = l));
+        this.paginationStore.orderBy = ascending ? 'name' : '-name';
+        return this.http.get<ServerResponse<Character>>(`${this.path}&limit=${limit}&offset=${offset}&orderBy=${this.paginationStore.orderBy}`).pipe(map(l => l), tap(l => this._characters = l));
+    }
+    private get valueOfOrderBy(): boolean {
+        return this.paginationStore.orderBy === 'name';
     }
 }
