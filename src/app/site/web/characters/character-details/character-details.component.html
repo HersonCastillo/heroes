@@ -1,0 +1,35 @@
+<div class="container-content">
+    <div class="mat-card">
+        <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="28px" fxLayoutAlign="flex-start"
+            class="container-wrap">
+            <div fxFlex="0 1 calc(25% - 28px)" fxFlex.lt-md="0 1 calc(50% - 28px)" fxFlex.lt-sm="100%">
+                <img [src]="getImage(character)" alt="character.name" class="full-w margin-x2 mat-elevation-z1">
+            </div>
+            <div fxFlex="0 1 calc(75% - 28px)" fxFlex.lt-md="0 1 calc(50% - 28px)" fxFlex.lt-sm="100%">
+                <div class="container-content">
+                    <b>Name </b>{{character?.name}} <br><br>
+                    <b>Description: </b> {{character?.description}} <br><br>
+                    <b>Last modification: </b> {{character?.modified | date}} <br><br>
+                    <mat-list>
+                        <mat-divider></mat-divider>
+                        <h2 mat-subheader>Stories</h2>
+                        <mat-divider></mat-divider>
+                        <mat-list-item *ngFor="let storie of stories">
+                            <mat-icon mat-list-icon>book</mat-icon>
+                            <h4 mat-line>{{storie.title}}</h4>
+                            <p mat-line>{{elipsis(storie.description, 50)}}</p>
+                        </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <h2 mat-subheader>Comics</h2>
+                        <mat-divider></mat-divider>
+                        <mat-list-item *ngFor="let comic of comics">
+                            <mat-icon mat-list-icon>star</mat-icon>
+                            <h4 mat-line>{{comic.title}}</h4>
+                            <p mat-line>{{elipsis(comic.description, 50)}}</p>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

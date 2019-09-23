@@ -34,6 +34,8 @@ export class CharactersComponent implements OnInit, AfterContentInit {
     public isUpp: boolean = true;
 
     ngOnInit() {
+        this.pagination.limit = 12;
+        this.pagination.offset = 0;
         this.withScroll(false, true);
     }
     withScroll(scroll: boolean, ascend: boolean): void {
@@ -41,7 +43,7 @@ export class CharactersComponent implements OnInit, AfterContentInit {
             this.fn.makeSnack("You cannot make more than 100 requests");
             do {
                 this.pagination.limit -= 6;
-            } while((this.pagination.limit - this.pagination.offset) > 100);
+            } while ((this.pagination.limit - this.pagination.offset) > 100);
         } else {
             if (scroll) this.isLoadScroll = true;
             else this.isLoaded = false;

@@ -1,18 +1,6 @@
 import { trigger, transition, style, animate, state } from '@angular/animations';
 
 export const animations = [
-    trigger('popOverState', [
-        state('show', style({
-            height: '65px',
-            opacity: 1
-        })),
-        state('hide', style({
-            height: '0px',
-            opacity: 0
-        })),
-        transition('show => hide', animate('250ms ease-out')),
-        transition('hide => show', animate('100ms ease-in'))
-    ]),
     trigger('opacityFrame', [
         state('show', style({
             opacity: 1

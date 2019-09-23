@@ -2,37 +2,9 @@
     <mat-toolbar-row class="mat-elevation-z3">
         <span id="logo" [routerLink]="['/']">MARVEL</span>
         <div class="div-flex"></div>
-        <button mat-raised-button class="btn-toolbar" (click)="showMenuForIndex(0)">Characters</button>
-        <button mat-raised-button class="btn-toolbar" (click)="showMenuForIndex(1)">Comics</button>
-        <button mat-raised-button class="btn-toolbar" (click)="showMenuForIndex(2)">Stories</button>
-    </mat-toolbar-row>
-    <mat-toolbar-row class="mat-elevation-z2" [@popOverState]="showMenu ? 'show' : 'hide'">
-        <div [ngSwitch]="indexMenu" class="full-w">
-            <div *ngSwitchCase="0">
-                <div class="div-block">
-                    <button mat-raised-button class="btn-toolbar" [routerLink]="['/characters', 'comics']" [disabled]="!showMenu">Character's comics</button>
-                    <button mat-raised-button class="btn-toolbar" [routerLink]="['/characters', 'stories']" [disabled]="!showMenu">Character's stories</button>
-                    <div class="div-flex"></div>
-                    <span>Characters</span>
-                </div>
-            </div>
-            <div *ngSwitchCase="1">
-                <div class="div-block">
-                    <button mat-raised-button class="btn-toolbar" [routerLink]="['/comics', 'characters']" [disabled]="!showMenu">Comic's characters</button>
-                    <button mat-raised-button class="btn-toolbar" [routerLink]="['/comics', 'stories']" [disabled]="!showMenu">Comic's stories</button>
-                    <div class="div-flex"></div>
-                    <span>Comics</span>
-                </div>
-            </div>
-            <div *ngSwitchCase="2">
-                <div class="div-block">
-                    <button mat-raised-button class="btn-toolbar" [disabled]="!showMenu">Stories characters</button>
-                    <button mat-raised-button class="btn-toolbar" [disabled]="!showMenu">Stories comics</button>
-                    <div class="div-flex"></div>
-                    <span>Stories</span>
-                </div>
-            </div>
-        </div>
+        <button mat-raised-button class="btn-toolbar" [routerLink]="['/characters']">Characters</button>
+        <button mat-raised-button class="btn-toolbar" [routerLink]="['/comics']">Comics</button>
+        <button mat-raised-button class="btn-toolbar" [routerLink]="['/stories']">Stories</button>
     </mat-toolbar-row>
 </mat-toolbar>
 <br>
