@@ -9,10 +9,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { SimpleComponent } from './site/dialog/simple/simple.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        SimpleComponent
     ],
     imports: [
         BrowserModule,
@@ -24,6 +26,9 @@ import { environment } from '../environments/environment';
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
     ],
     providers: [],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [
+        SimpleComponent
+    ]
 })
 export class AppModule { }

@@ -16,7 +16,8 @@ export class StorieDetailsComponent implements OnInit {
     constructor(
         private storieProvider: StoriesService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private fn: Fn
     ){}
     public characters: Character[] = [];
     public storie: Storie;
@@ -47,5 +48,17 @@ export class StorieDetailsComponent implements OnInit {
     }
     elipsis(str: string, ln: number): string {
         return Fn.elipsis(str, ln);
+    }
+    showDescription(char: any, type: string): void {
+        switch(type){
+            case 'characters': {
+                this.fn.simple(char.name, char.description || 'No description yet');
+                break;
+            }
+            case 'comics': {
+                this.fn.simple(char.title, char.description || 'No description yet');
+                break;
+            }
+        }
     }
 }

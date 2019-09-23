@@ -15,17 +15,25 @@
                         <mat-divider></mat-divider>
                         <h2 mat-subheader>Stories</h2>
                         <mat-divider></mat-divider>
+                        <mat-list-item *ngIf="stories.length == 0">
+                            <h4 mat-line>No records found</h4>
+                        </mat-list-item>
                         <mat-list-item *ngFor="let storie of stories">
                             <mat-icon mat-list-icon>book</mat-icon>
-                            <h4 mat-line>{{storie.title}}</h4>
+                            <h4 mat-line (click)="showDescription(storie, 'stories')" class="cursor-p">{{storie.title}}
+                            </h4>
                             <p mat-line>{{elipsis(storie.description, 50)}}</p>
                         </mat-list-item>
                         <mat-divider></mat-divider>
-                        <h2 mat-subheader>Comics</h2>
+                        <h2 mat-subheader>Characters</h2>
                         <mat-divider></mat-divider>
+                        <mat-list-item *ngIf="characters.length == 0">
+                            <h4 mat-line>No records found</h4>
+                        </mat-list-item>
                         <mat-list-item *ngFor="let character of characters">
                             <mat-icon mat-list-icon>person</mat-icon>
-                            <h4 mat-line>{{character.name}}</h4>
+                            <h4 mat-line (click)="showDescription(character, 'characters')" class="cursor-p">
+                                {{character.name}}</h4>
                             <p mat-line>{{elipsis(character.description, 50)}}</p>
                         </mat-list-item>
                     </mat-list>

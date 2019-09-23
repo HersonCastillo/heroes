@@ -16,7 +16,8 @@ export class ComicDetailsComponent implements OnInit {
     constructor(
         private comicProvider: ComicsService,
         private route: ActivatedRoute,
-        private router: Router
+        private router: Router,
+        private fn: Fn
     ){}
 
     public characters: Character[] = [];
@@ -49,5 +50,17 @@ export class ComicDetailsComponent implements OnInit {
     }
     elipsis(str: string, ln: number): string {
         return Fn.elipsis(str, ln);
+    }
+    showDescription(char: any, type: string): void {
+        switch(type){
+            case 'stories': {
+                this.fn.simple(char.title, char.description || 'No description yet');
+                break;
+            }
+            case 'characters': {
+                this.fn.simple(char.name, char.description || 'No description yet');
+                break;
+            }
+        }
     }
 }
