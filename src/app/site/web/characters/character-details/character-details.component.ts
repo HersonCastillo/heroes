@@ -81,11 +81,16 @@ export class CharacterDetailsComponent implements OnInit {
         });
         this.fn.makeSnack('Item added to favorite list');
     }
-    removeFromFavoriteList(key: string, id: any): void {
-        Fn.removeFavoriteItem(key, id);
-        this.fn.makeSnack('Item removed from favorite list');
+    removeFromFavoriteList(key: string, object: any): void {
+        if(Fn.propertyExist(object, 'id')){
+            Fn.removeFavoriteItem(key, object.id);
+            this.fn.makeSnack('Item removed from favorite list');
+        }
     }
-    isItemInFavorites(key: string, id: string): boolean {
-        return Fn.isItemInFavoriteList(key, id);
+    isItemInFavorites(key: string, object: any): boolean {
+        if(Fn.propertyExist(object, 'id')){
+            return Fn.isItemInFavoriteList(key, object.id);
+        }
+        return false;
     }
 }

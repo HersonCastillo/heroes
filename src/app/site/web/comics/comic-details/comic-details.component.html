@@ -13,12 +13,12 @@
                     <b>Last modification </b> {{comic?.modified | date}} <br><br>
                     <div class="div-block">
                         <div class="div-flex"></div>
-                        <button mat-raised-button color="primary" *ngIf="!isItemInFavorites('comics', comic.id)"
+                        <button mat-raised-button color="primary" *ngIf="!isItemInFavorites('comics', comic)"
                             (click)="addFavoriteList('comics', comic)">
                             Add to favorites list
                         </button>
-                        <button mat-raised-button color="accent" *ngIf="isItemInFavorites('comics', comic.id)"
-                            (click)="removeFromFavoriteList('comics', comic.id)">
+                        <button mat-raised-button color="accent" *ngIf="isItemInFavorites('comics', comic)"
+                            (click)="removeFromFavoriteList('comics', comic)">
                             Remove from favorites list
                         </button>
                     </div>

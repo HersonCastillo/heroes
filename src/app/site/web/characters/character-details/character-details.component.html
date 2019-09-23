@@ -12,10 +12,10 @@
                     <b>Last modification </b> {{character?.modified | date}} <br><br>
                     <div class="div-block">
                         <div class="div-flex"></div>
-                        <button mat-raised-button color="primary" *ngIf="!isItemInFavorites('characters', character.id)" (click)="addFavoriteList('characters', character)">
+                        <button mat-raised-button color="primary" *ngIf="!isItemInFavorites('characters', character)" (click)="addFavoriteList('characters', character)">
                             Add to favorites list
                         </button>
-                        <button mat-raised-button color="accent" *ngIf="isItemInFavorites('characters', character.id)" (click)="removeFromFavoriteList('characters', character.id)">
+                        <button mat-raised-button color="accent" *ngIf="isItemInFavorites('characters', character)" (click)="removeFromFavoriteList('characters', character)">
                             Remove from favorites list
                         </button>
                     </div>
