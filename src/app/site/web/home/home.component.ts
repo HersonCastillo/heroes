@@ -18,7 +18,8 @@ export class HomeComponent implements AfterContentInit {
     constructor(
         private characterProvider: CharactersService,
         private comicProvider: ComicsService,
-        private storieProvider: StoriesService
+        private storieProvider: StoriesService,
+        private fn: Fn
     ){}
     public isLoadedModules = {
         characters: false,
@@ -55,5 +56,29 @@ export class HomeComponent implements AfterContentInit {
             return `${val.thumbnail.path}/portrait_xlarge.${val.thumbnail.extension}`;
         }
         return '/assets/img/marvel.png';
+    }
+
+    addFavoriteList(key: string, object: any): void {
+        Fn.addFavoriteItem(key, {
+            id: object.id,
+            name: object.name,
+            title: object.title,
+            description: object.description
+        });
+    }
+    removeFromFavoriteList(key: string, id: any): void {
+        Fn.removeFavoriteItem(key, id);
+    }
+    isItemInFavorites(key: string, id: string): boolean {
+        return Fn.isItemInFavoriteList(key, id);
+    }
+    checkFavoriteList(key: string, object: any): void {
+        if(this.isItemInFavorites(key, object.id)){
+            this.removeFromFavoriteList(key, object.id);
+            this.fn.makeSnack('Item removed from favorite list');
+        } else {
+            this.addFavoriteList(key, object);
+            this.fn.makeSnack('Item added to favorite list');
+        }
     }
 }

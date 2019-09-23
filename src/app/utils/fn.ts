@@ -62,4 +62,35 @@ export class Fn {
         }
         return false;
     }
+    public static addFavoriteItem(key: string, object: any): void {
+        let objects: string = this.getValue(key);
+        if(objects){
+            let objectsBlob = JSON.parse(objects) as Array<any>;
+            objectsBlob.push(object);
+            this.setValue(key, JSON.stringify(objectsBlob));
+        } else {
+            this.setValue(key, JSON.stringify([object]));
+        }
+    }
+    public static isItemInFavoriteList(key: string, id: string): boolean {
+        let objects: string = this.getValue(key);
+        if(objects){
+            let objectsBlob = JSON.parse(objects) as Array<any>;
+            let result: boolean = false;
+            for(let i of objectsBlob){
+                result = id == i.id;
+                if(result) break;
+            }
+            return result;
+        }
+        return false;
+    }
+    public static removeFavoriteItem(key: string, id: string): void {
+        let objects: string = this.getValue(key);
+        if(objects){
+            let objectsBlob = JSON.parse(objects) as Array<any>;
+            let nObjectsBlob = objectsBlob.filter(r => r.id != id);
+            this.setValue(key, JSON.stringify(nObjectsBlob));
+        }
+    }
 }
