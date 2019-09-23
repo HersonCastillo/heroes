@@ -56,6 +56,9 @@ export class ComicsComponent implements OnInit, AfterContentInit {
                 } else {
                     this.isLoaded = true;
                 }
+            }, err => {
+                Fn.errLog(err);
+                this.fn.simple('Ups!', 'An error occurred when tried get data [Comics]');
             });
         }
     }

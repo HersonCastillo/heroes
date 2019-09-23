@@ -38,14 +38,23 @@ export class HomeComponent implements AfterContentInit {
         this.characterProvider.getCharacters(12, 0, true).subscribe(response => {
             this.characters = response.data.results.slice(0, 6);
             this.isLoadedModules.characters = true;
+        }, err => {
+            Fn.errLog(err);
+            this.fn.simple('Ups!', 'An error occurred when tried get data [Characters]');
         });
         this.comicProvider.getComics(12, 0, true).subscribe(response => {
             this.comics = response.data.results.slice(0, 6);
             this.isLoadedModules.comics = true;
+        }, err => {
+            Fn.errLog(err);
+            this.fn.simple('Ups!', 'An error occurred when tried get data [Comics]');
         });
         this.storieProvider.getStories(12, 0).subscribe(response => {
             this.stories = response.data.results.slice(0, 6);
             this.isLoadedModules.stories = true;
+        }, err => {
+            Fn.errLog(err);
+            this.fn.simple('Ups!', 'An error occurred when tried get data [Stories]');
         });
     }
     elipsis(str: string, ln: number): string {

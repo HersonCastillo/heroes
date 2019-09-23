@@ -30,10 +30,19 @@ export class StorieDetailsComponent implements OnInit {
                     this.storie = storie.data.results[0];
                     this.storieProvider.getStoriesCharacters(this.storie).subscribe(characters => {
                         this.characters = characters.data.results;
+                    }, err => {
+                        Fn.errLog(err);
+                        this.fn.simple('Ups!', 'An error occurred when tried get data [Characters]');
                     });
                     this.storieProvider.getStoriesComics(this.storie).subscribe(comics => {
                         this.comics = comics.data.results;
+                    }, err => {
+                        Fn.errLog(err);
+                        this.fn.simple('Ups!', 'An error occurred when tried get data [Comics]');
                     });
+                }, err => {
+                    Fn.errLog(err);
+                    this.fn.simple('Ups!', 'An error occurred when tried get data [Stories]');
                 });
             } else {
                 this.router.navigate(['/error', 'not-found']);
