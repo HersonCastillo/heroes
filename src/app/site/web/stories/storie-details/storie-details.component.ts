@@ -39,7 +39,7 @@ export class StorieDetailsComponent implements OnInit {
             }
         });
     }
-    getImage(val: Character): string {
+    getImage(val: Storie): string {
         if (Fn.propertyExist(val, 'thumbnail')) {
             return `${val.thumbnail.path}/portrait_xlarge.${val.thumbnail.extension}`;
         }

@@ -41,7 +41,7 @@ export class ComicDetailsComponent implements OnInit {
             }
         });
     }
-    getImage(val: Character): string {
+    getImage(val: Comic): string {
         if (Fn.propertyExist(val, 'thumbnail')) {
             return `${val.thumbnail.path}/portrait_xlarge.${val.thumbnail.extension}`;
         }
