@@ -10,11 +10,13 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { SimpleComponent } from './site/dialog/simple/simple.component';
+import { FavoriteListComponent } from './site/dialog/favorite-list/favorite-list.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        SimpleComponent
+        SimpleComponent,
+        FavoriteListComponent
     ],
     imports: [
         BrowserModule,
@@ -28,7 +30,8 @@ import { SimpleComponent } from './site/dialog/simple/simple.component';
     providers: [],
     bootstrap: [AppComponent],
     entryComponents: [
-        SimpleComponent
+        SimpleComponent,
+        FavoriteListComponent
     ]
 })
 export class AppModule { }

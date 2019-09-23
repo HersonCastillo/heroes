@@ -1,0 +1,62 @@
+<mat-tab-group dynamicHeight>
+    <mat-tab label="Characters">
+        <mat-list>
+            <mat-divider></mat-divider>
+            <mat-list-item *ngIf="getArray(characters).length == 0">
+                <h4 mat-line>No records found</h4>
+            </mat-list-item>
+            <mat-list-item *ngFor="let character of getArray(characters)">
+                <mat-icon mat-list-icon>star</mat-icon>
+                <h4 mat-line>{{character.name}}
+                </h4>
+                <p mat-line>{{character.description || 'No description yet'}}</p>
+                <button mat-icon-button (click)="removeFromFavoriteList('characters', character.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-icon-button (click)="goto(['/characters', 'details', character.id])">
+                    <mat-icon>arrow_right</mat-icon>
+                </button>
+            </mat-list-item>
+        </mat-list>
+    </mat-tab>
+    <mat-tab label="Comics">
+        <mat-list>
+            <mat-divider></mat-divider>
+            <mat-list-item *ngIf="getArray(comics).length == 0">
+                <h4 mat-line>No records found</h4>
+            </mat-list-item>
+            <mat-list-item *ngFor="let comic of getArray(comics)">
+                <mat-icon mat-list-icon>star</mat-icon>
+                <h4 mat-line>{{comic.title}}
+                </h4>
+                <p mat-line>{{comic.description || 'No description yet'}}</p>
+                <button mat-icon-button (click)="removeFromFavoriteList('comics', comic.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-icon-button (click)="goto(['/comics', 'details', comic.id])">
+                    <mat-icon>arrow_right</mat-icon>
+                </button>
+            </mat-list-item>
+        </mat-list>
+    </mat-tab>
+    <mat-tab label="Stories">
+        <mat-list>
+            <mat-divider></mat-divider>
+            <mat-list-item *ngIf="getArray(stories).length == 0">
+                <h4 mat-line>No records found</h4>
+            </mat-list-item>
+            <mat-list-item *ngFor="let storie of getArray(stories)">
+                <mat-icon mat-list-icon>star</mat-icon>
+                <h4 mat-line>{{storie.title}}
+                </h4>
+                <p mat-line>{{storie.description || 'No description yet'}}</p>
+                <button mat-icon-button (click)="removeFromFavoriteList('stories', storie.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-icon-button (click)="goto(['/stories', 'details', storie.id])">
+                    <mat-icon>arrow_right</mat-icon>
+                </button>
+            </mat-list-item>
+        </mat-list>
+    </mat-tab>
+</mat-tab-group>

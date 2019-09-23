@@ -2,7 +2,7 @@
     <mat-toolbar-row class="mat-elevation-z3">
         <span id="logo" [routerLink]="['/']">MARVEL</span>
         <div class="div-flex"></div>
-        <button mat-icon-button natTooltip="My favorites">
+        <button mat-icon-button natTooltip="My favorites" (click)="showFavoriteListModal()">
             <mat-icon>star</mat-icon>
         </button>
         <button mat-raised-button class="btn-toolbar" [routerLink]="['/characters']">Characters</button>
