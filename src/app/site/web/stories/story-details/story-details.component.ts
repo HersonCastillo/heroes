@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { StoriesService } from 'src/app/services/stories.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Character } from 'src/app/interfaces/character';
-import { Storie } from 'src/app/interfaces/storie';
+import { Story } from 'src/app/interfaces/story';
 import { Comic } from 'src/app/interfaces/comic';
 import { Fn } from 'src/app/utils/fn';
 
 @Component({
     selector: 'app-storie-details',
-    templateUrl: './storie-details.component.html',
-    styleUrls: ['./storie-details.component.scss']
+    templateUrl: './story-details.component.html',
+    styleUrls: ['./story-details.component.scss']
 })
-export class StorieDetailsComponent implements OnInit {
+export class StoryDetailsComponent implements OnInit {
 
     constructor(
         private storieProvider: StoriesService,
@@ -20,28 +20,39 @@ export class StorieDetailsComponent implements OnInit {
         private fn: Fn
     ){}
     public characters: Character[] = [];
-    public storie: Storie;
+    public story: Story;
     public comics: Comic[] = [];
     ngOnInit(){
         this.route.params.subscribe(param => {
             if (Fn.propertyExist(param, 'id')) {
                 let id = param['id'];
-                this.storieProvider.getStorie(id).subscribe(storie => {
-                    this.storie = storie.data.results[0];
-                    this.storieProvider.getStoriesCharacters(this.storie).subscribe(characters => {
-                        this.characters = characters.data.results;
-                    }, err => {
-                        Fn.errLog(err);
-                        this.fn.simple('Ups!', 'An error occurred when tried get data [Characters]');
-                    });
-                    this.storieProvider.getStoriesComics(this.storie).subscribe(comics => {
-                        this.comics = comics.data.results;
-                    }, err => {
-                        Fn.errLog(err);
-                        this.fn.simple('Ups!', 'An error occurred when tried get data [Comics]');
-                    });
+                this.storieProvider.getStorie(id).subscribe(story => {
+                    if(story.code != 200){
+                        this.story = story.data.results[0];
+                        this.storieProvider.getStoriesCharacters(this.story).subscribe(characters => {
+                            this.characters = characters.data.results;
+                        }, err => {
+                            Fn.errLog(err);
+                            this.router.navigate(['/error', 'not-found']);
+                            this.fn.simple('Ups!', 'An error occurred when tried get data [Characters]');
+                        });
+                        this.storieProvider.getStoriesComics(this.story).subscribe(comics => {
+                            this.comics = comics.data.results;
+                        }, err => {
+                            Fn.errLog(err);
+                            this.router.navigate(['/error', 'internal-error']);
+                            this.fn.simple('Ups!', 'An error occurred when tried get data [Comics]');
+                        });
+                    } else {
+                        if(story.code >= 400 && story.code < 500){
+                            this.router.navigate(['/error', 'not-found']);
+                        } else {
+                            this.router.navigate(['/error', 'internal-error']);
+                        }
+                    }
                 }, err => {
                     Fn.errLog(err);
+                    this.router.navigate(['/error', 'internal-error']);
                     this.fn.simple('Ups!', 'An error occurred when tried get data [Stories]');
                 });
             } else {
@@ -49,7 +60,7 @@ export class StorieDetailsComponent implements OnInit {
             }
         });
     }
-    getImage(val: Storie): string {
+    getImage(val: Story): string {
         if (Fn.propertyExist(val, 'thumbnail')) {
             return `${val.thumbnail.path}/portrait_xlarge.${val.thumbnail.extension}`;
         }

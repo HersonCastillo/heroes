@@ -4,17 +4,17 @@ import { StoriesComponent } from './stories/stories.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MaterialModule } from 'src/app/material.module';
 import { Routes, RouterModule } from '@angular/router';
-import { StorieDetailsComponent } from './storie-details/storie-details.component';
+import { StoryDetailsComponent } from './story-details/story-details.component';
 
 const routes: Routes = [
     { path: '', children: [
         { path: '', component: StoriesComponent },
-        { path: 'details/:id', component: StorieDetailsComponent }
+        { path: 'details/:id', component: StoryDetailsComponent }
     ] }
 ];
 
 @NgModule({
-    declarations: [StoriesComponent, StorieDetailsComponent],
+    declarations: [StoriesComponent, StoryDetailsComponent],
     imports: [
         CommonModule,
         ScrollingModule,

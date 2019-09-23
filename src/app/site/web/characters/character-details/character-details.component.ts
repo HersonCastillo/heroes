@@ -3,7 +3,7 @@ import { CharactersService } from 'src/app/services/characters.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Fn } from 'src/app/utils/fn';
 import { Character } from 'src/app/interfaces/character';
-import { Storie } from 'src/app/interfaces/storie';
+import { Story } from 'src/app/interfaces/story';
 import { Comic } from 'src/app/interfaces/comic';
 
 @Component({
@@ -21,7 +21,7 @@ export class CharacterDetailsComponent implements OnInit {
     ) { }
 
     public character: Character;
-    public stories: Storie[] = [];
+    public stories: Story[] = [];
     public comics: Comic[] = [];
 
     ngOnInit() {
@@ -34,16 +34,19 @@ export class CharacterDetailsComponent implements OnInit {
                         this.comics = comics.data.results;
                     }, err => {
                         Fn.errLog(err);
+                        this.router.navigate(['/error', 'not-found']);
                         this.fn.simple('Ups!', 'An error occurred when tried get data [Comics]');
                     });
                     this.characterProvider.getCharactersStories(this.character).subscribe(stories => {
                         this.stories = stories.data.results;
                     }, err => {
                         Fn.errLog(err);
+                        this.router.navigate(['/error', 'internal-error']);
                         this.fn.simple('Ups!', 'An error occurred when tried get data [Stories]');
                     });
                 }, err => {
                     Fn.errLog(err);
+                    this.router.navigate(['/error', 'internal-error']);
                     this.fn.simple('Ups!', 'An error occurred when tried get data [Characters]');
                 });
             } else {

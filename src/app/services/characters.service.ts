@@ -5,7 +5,7 @@ import { tap, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Character } from 'src/app/interfaces/character';
 import { ServerResponse } from 'src/app/interfaces/server-response';
-import { Storie } from '../interfaces/storie';
+import { Story } from '../interfaces/story';
 import { Comic } from '../interfaces/comic';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class CharactersService {
     private _characters: ServerResponse<Character> = null;
     private _character: ServerResponse<Character> = null;
     private _comics: ServerResponse<Comic> = null;
-    private _stories: ServerResponse<Storie> = null;
+    private _stories: ServerResponse<Story> = null;
     private paginationStore = {
         limit: 0,
         offset: 0,
@@ -43,10 +43,10 @@ export class CharactersService {
         this._id = character.id.toString();
         return this.http.get<ServerResponse<Comic>>(`${Fn.getPath(`characters/${character.id}/comics`)}`).pipe(map(l => l), tap(l => this._comics = l));
     }
-    public getCharactersStories(character: Character): Observable<ServerResponse<Storie>>{
+    public getCharactersStories(character: Character): Observable<ServerResponse<Story>>{
         if(this._stories != null && this._id == character.id.toString()) return of(this._stories);
         this._id = character.id.toString();
-        return this.http.get<ServerResponse<Storie>>(`${Fn.getPath(`characters/${character.id}/stories`)}`).pipe(map(l => l), tap(l => this._stories = l));
+        return this.http.get<ServerResponse<Story>>(`${Fn.getPath(`characters/${character.id}/stories`)}`).pipe(map(l => l), tap(l => this._stories = l));
     }
     public getCharacter(id: string): Observable<ServerResponse<Character>> {
         if(this._character != null && this._id == id) return of(this._character);

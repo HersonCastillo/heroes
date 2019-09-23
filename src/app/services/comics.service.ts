@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Comic } from 'src/app/interfaces/comic';
 import { ServerResponse } from 'src/app/interfaces/server-response';
 import { Character } from '../interfaces/character';
-import { Storie } from '../interfaces/storie';
+import { Story } from '../interfaces/story';
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +19,7 @@ export class ComicsService {
     private _comics: ServerResponse<Comic> = null;
     private _comic: ServerResponse<Comic> = null;
     private _characters: ServerResponse<Character> = null;
-    private _stories: ServerResponse<Storie> = null;
+    private _stories: ServerResponse<Story> = null;
 
     private paginationStore = {
         limit: 0,
@@ -50,10 +50,10 @@ export class ComicsService {
         this._id = comic.id.toString();
         return this.http.get<ServerResponse<Character>>(`${Fn.getPath(`comics/${comic.id}/characters`)}`).pipe(map(l => l), tap(l => this._characters = l));
     }
-    public getComicsStories(comic: Comic): Observable<ServerResponse<Storie>>{
+    public getComicsStories(comic: Comic): Observable<ServerResponse<Story>>{
         if(this._stories != null && this._id == comic.id.toString()) return of(this._stories);
         this._id = comic.id.toString();
-        return this.http.get<ServerResponse<Storie>>(`${Fn.getPath(`comics/${comic.id}/stories`)}`).pipe(map(l => l), tap(l => this._stories = l));
+        return this.http.get<ServerResponse<Story>>(`${Fn.getPath(`comics/${comic.id}/stories`)}`).pipe(map(l => l), tap(l => this._stories = l));
     }
     private get valueOfOrderBy(): boolean {
         return this.paginationStore.orderBy === 'issueNumber';

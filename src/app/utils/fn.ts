@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ServerResponse } from 'src/app/interfaces/server-response';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { SimpleComponent } from '../site/dialog/simple/simple.component';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +12,8 @@ import { SimpleComponent } from '../site/dialog/simple/simple.component';
 export class Fn {
     constructor(
         private snack: MatSnackBar,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private router: Router
     ){}
     public makeSnack(text: string, duration?: number): void {
         this.snack.open(text, null, { duration: duration || 3500 });
@@ -28,6 +31,24 @@ export class Fn {
             },
             ...config
         });
+    }
+    public handleErrorResponse<T>(response: ServerResponse<T>, cb: Function, notFound?: Function, internalError?: Function): void {
+        switch(response.code){
+            case 200: {
+                cb(response);
+                break;
+            }
+            case 500: {
+                internalError(response);
+                this.router.navigate(['/error', 'internal-error']);
+                break;
+            }
+            default: {
+                notFound(response);
+                this.router.navigate(['/error', 'not-found']);
+                break;
+            }
+        }
     }
     public static setValue(key: string, value: string): void {
         localStorage.setItem(key, value);

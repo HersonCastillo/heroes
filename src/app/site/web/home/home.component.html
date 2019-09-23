@@ -2,7 +2,7 @@
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 </div>
 <div [@opacityFrameTransform]="isLoaded ? 'show' : 'hide'">
-    <mat-tab-group dynamicHeight class="tab-container">
+    <mat-tab-group dynamicHeight mat-stretch-tabs class="tab-container">
         <mat-tab label="Characters">
             <!--Characters-->
             <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start"
@@ -14,6 +14,9 @@
                         More information
                     </button>
                 </mat-toolbar>
+                <div class="full-w txt-center" *ngIf="characters.length == 0">
+                    <span>No records found</span>
+                </div>
                 <ng-template *ngFor="let character of characters" [ngIf]="true">
                     <mat-card fxFlex="0 1 calc(16.66% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%"
                         class="mat-elevation-z4">
@@ -54,6 +57,9 @@
                         More information
                     </button>
                 </mat-toolbar>
+                <div class="full-w txt-center" *ngIf="comics.length == 0">
+                    <span>No records found</span>
+                </div>
                 <ng-template *ngFor="let comic of comics" [ngIf]="true">
                     <mat-card fxFlex="0 1 calc(16.66% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%"
                         class="mat-elevation-z4">
@@ -94,6 +100,9 @@
                         More information
                     </button>
                 </mat-toolbar>
+                <div class="full-w txt-center" *ngIf="stories.length == 0">
+                    <span>No records found</span>
+                </div>
                 <ng-template *ngFor="let storie of stories" [ngIf]="true">
                     <mat-card fxFlex="0 1 calc(16.66% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%"
                         class="mat-elevation-z4">

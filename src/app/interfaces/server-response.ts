@@ -1,5 +1,5 @@
 export interface ServerResponse<T> {
-    code: string;
+    code: number;
     status: number;
     copyright: string;
     attributionText: string;

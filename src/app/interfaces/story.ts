@@ -1,6 +1,6 @@
 import { Thumbnail, ItemProperty, Item } from './properties';
 
-export interface Storie {
+export interface Story {
     id?: number;
     title: string;
     description: string;

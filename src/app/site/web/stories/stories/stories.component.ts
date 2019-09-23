@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterContentInit, ViewChild } from '@angular/core';
-import { Storie } from 'src/app/interfaces/storie';
+import { Story } from 'src/app/interfaces/story';
 import { StoriesService } from 'src/app/services/stories.service';
 import { CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { filter } from 'rxjs/operators';
@@ -18,7 +18,7 @@ export class StoriesComponent implements OnInit, AfterContentInit {
     ) { }
     @ViewChild('scroll', null)
     public scroll: CdkVirtualScrollViewport;
-    public stories: Storie[] = [];
+    public stories: Story[] = [];
     public isLoadScroll: boolean = false;
     public isLoaded: boolean = false;
     public filter: string = "";
@@ -49,6 +49,8 @@ export class StoriesComponent implements OnInit, AfterContentInit {
                 }
             }, err => {
                 Fn.errLog(err);
+                this.isLoaded = true;
+                this.isLoadScroll = false;
                 this.fn.simple('Ups!', 'An error occurred when tried get data [Stories]');
             });
         }
@@ -64,7 +66,7 @@ export class StoriesComponent implements OnInit, AfterContentInit {
     elipsis(str: string, ln: number): string {
         return Fn.elipsis(str, ln);
     }
-    getImage(val: Storie): string {
+    getImage(val: Story): string {
         if (Fn.propertyExist(val, 'thumbnail')) {
             return `${val.thumbnail.path}/portrait_xlarge.${val.thumbnail.extension}`;
         }
