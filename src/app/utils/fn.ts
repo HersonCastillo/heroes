@@ -12,6 +12,12 @@ export class Fn {
     public makeSnack(text: string, duration?: number): void {
         this.snack.open(text, null, { duration: duration || 3500 });
     }
+    public static setValue(key: string, value: string): void {
+        localStorage.setItem(key, value);
+    }
+    public static getValue(key: string): string {
+        return localStorage.getItem(key);
+    }
     public static getPath(path: string): string {
         return `${environment.baseurl}/${path}?apikey=${environment.user.key.public}&ts=${environment.ts}&hash=${environment.envhash}`;
     }

@@ -40,7 +40,6 @@ export class CharactersComponent implements OnInit, AfterContentInit {
     }
     withScroll(scroll: boolean, ascend: boolean): void {
         if ((this.pagination.limit - this.pagination.offset) > 100) {
-            this.fn.makeSnack("You cannot make more than 100 requests");
             do {
                 this.pagination.limit -= 6;
             } while ((this.pagination.limit - this.pagination.offset) > 100);
