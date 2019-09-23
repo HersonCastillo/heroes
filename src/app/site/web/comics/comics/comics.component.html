@@ -1,54 +1,67 @@
 <div class="container-content">
-        <mat-toolbar class="container-wrap-title mat-elevation-z2">
-            <span>Best entertainment comics</span>
-            <div class="div-flex"></div>
-            <button mat-raised-button *ngIf="isUpp" (click)="changeOrder()" [disabled]="!isLoaded">
-                Order by: name (ascend)
-            </button>
-            <button mat-raised-button *ngIf="!isUpp" (click)="changeOrder()" [disabled]="!isLoaded">
-                Order by: name (descend)
-            </button>
-        </mat-toolbar>
+    <mat-toolbar class="container-wrap-title mat-elevation-z2">
+        <span>Best entertainment comics</span>
+        <div class="div-flex"></div>
+        <button mat-raised-button *ngIf="isUpp" (click)="changeOrder()" [disabled]="!isLoaded">
+            Order by: name (ascend)
+        </button>
+        <button mat-raised-button *ngIf="!isUpp" (click)="changeOrder()" [disabled]="!isLoaded">
+            Order by: name (descend)
+        </button>
+    </mat-toolbar>
+    <div class="div-block">
+        <mat-form-field style="width: 75%; margin-right: 10px;" appearance="outline">
+            <mat-label>Filter value</mat-label>
+            <input type="text" matInput [(ngModel)]="filter" (ngModelChange)="filterBy()" />
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <mat-form-field style="width: 25%;" appearance="outline">
+            <mat-label>Filter by</mat-label>
+            <mat-select [value]="0" (valueChange)="changeFilterType($event)">
+                <mat-option [value]="0">Title</mat-option>
+                <mat-option [value]="1">Format</mat-option>
+                <mat-option [value]="2">Issue Number</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <mat-progress-bar mode="indeterminate" class="full-w margin-bottom-x1" *ngIf="!isLoaded"></mat-progress-bar>
+    <div class="txt-center full-w" *ngIf="comics.length == 0">
+        <span>No records found</span>
+    </div>
+    <cdk-virtual-scroll-viewport [itemSize]="0" class="vs-viewport" #scroll>
+        <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="28px" fxLayoutAlign="flex-start"
+            class="container-wrap">
+            <ng-template *cdkVirtualFor="let comic of comics" [ngIf]="true">
+                <mat-card fxFlex="0 1 calc(16% - 28px)" fxFlex.lt-md="0 1 calc(50% - 28px)" fxFlex.lt-sm="100%"
+                    class="mat-elevation-z4 card-content">
+                    <mat-card-header>
+                        <mat-card-title>
+                            {{elipsis(comic.title, 8)}}
+                        </mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image [src]="getImage(comic)" [routerLink]="['/comics', 'details', comic.id]" [alt]="comic.title" style="height: 225px; cursor: pointer;">
+                    <mat-card-actions>
+                        <div class="div-block">
+                            <div class="div-flex"></div>
+                            <button mat-icon-button [routerLink]="['/comics', 'details', comic.id]">
+                                <mat-icon>link</mat-icon>
+                            </button>
+                            <button mat-icon-button style="color: orange;" (click)="checkFavoriteList('comics', comic)">
+                                <mat-icon *ngIf="!isItemInFavorites('comics', comic.id)">star_outline
+                                </mat-icon>
+                                <mat-icon *ngIf="isItemInFavorites('comics', comic.id)">star</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card-actions>
+                </mat-card>
+            </ng-template>
+        </div>
+    </cdk-virtual-scroll-viewport>
+    <div class="loading-data float-container" *ngIf="isLoadScroll">
         <div class="div-block">
-            <mat-form-field style="width: 75%; margin-right: 10px;" appearance="outline">
-                <mat-label>Filter value</mat-label>
-                <input type="text" matInput [(ngModel)]="filter" (ngModelChange)="filterBy()"/>
-                <mat-icon matSuffix>search</mat-icon>
-            </mat-form-field>
-            <mat-form-field style="width: 25%;" appearance="outline">
-                <mat-label>Filter by</mat-label>
-                <mat-select [value]="0" (valueChange)="changeFilterType($event)">
-                    <mat-option [value]="0">Title</mat-option>
-                    <mat-option [value]="1">Format</mat-option>
-                    <mat-option [value]="2">Issue Number</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <mat-progress-bar mode="indeterminate" class="full-w margin-bottom-x1" *ngIf="!isLoaded"></mat-progress-bar>
-        <div class="txt-center full-w" *ngIf="comics.length == 0">
-            <span>No records found</span>
-        </div>
-        <cdk-virtual-scroll-viewport [itemSize]="0" class="vs-viewport" #scroll>
-            <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="28px" fxLayoutAlign="flex-start"
-                class="container-wrap">
-                <ng-template *cdkVirtualFor="let comic of comics" [ngIf]="true">
-                    <mat-card fxFlex="0 1 calc(16% - 28px)" fxFlex.lt-md="0 1 calc(50% - 28px)" fxFlex.lt-sm="100%"
-                        class="mat-elevation-z4 card-content" [routerLink]="['/comics', 'details', comic.id]">
-                        <mat-card-header>
-                            <mat-card-title>
-                                {{elipsis(comic.title, 10)}}
-                            </mat-card-title>
-                        </mat-card-header>
-                        <img mat-card-image [src]="getImage(comic)" [alt]="comic.title" style="height: 245px;">
-                    </mat-card>
-                </ng-template>
-            </div>
-        </cdk-virtual-scroll-viewport>
-        <div class="loading-data float-container" *ngIf="isLoadScroll">
-            <div class="div-block">
-                <div class="div-flex"></div>
-                <mat-progress-spinner mode="indeterminate" diameter="20"></mat-progress-spinner>
-                <span>Loading data...</span>
-            </div>
+            <div class="div-flex"></div>
+            <mat-progress-spinner mode="indeterminate" diameter="20"></mat-progress-spinner>
+            <span>Loading data...</span>
         </div>
     </div>
+</div>

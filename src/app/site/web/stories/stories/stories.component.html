@@ -11,13 +11,27 @@
             class="container-wrap">
             <ng-template *cdkVirtualFor="let storie of stories" [ngIf]="true">
                 <mat-card fxFlex="0 1 calc(16% - 28px)" fxFlex.lt-md="0 1 calc(50% - 28px)" fxFlex.lt-sm="100%"
-                    class="mat-elevation-z4 card-content" [routerLink]="['/stories', 'details', storie.id]">
+                    class="mat-elevation-z4 card-content">
                     <mat-card-header>
                         <mat-card-title>
-                            {{elipsis(storie.title, 10)}}
+                            {{elipsis(storie.title, 8)}}
                         </mat-card-title>
                     </mat-card-header>
-                    <img mat-card-image [src]="getImage(storie)" [alt]="storie.title" style="height: 245px;">
+                    <img mat-card-image [src]="getImage(storie)" [routerLink]="['/stories', 'details', storie.id]" [alt]="storie.title" style="height: 225px; cursor: pointer;">
+                    <mat-card-actions>
+                        <div class="div-block">
+                            <div class="div-flex"></div>
+                            <button mat-icon-button [routerLink]="['/stories', 'details', storie.id]">
+                                <mat-icon>link</mat-icon>
+                            </button>
+                            <button mat-icon-button style="color: orange;"
+                                (click)="checkFavoriteList('stories', storie)">
+                                <mat-icon *ngIf="!isItemInFavorites('stories', storie.id)">star_outline
+                                </mat-icon>
+                                <mat-icon *ngIf="isItemInFavorites('stories', storie.id)">star</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card-actions>
                 </mat-card>
             </ng-template>
         </div>

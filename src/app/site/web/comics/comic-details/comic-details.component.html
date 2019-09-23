@@ -11,6 +11,17 @@
                     <b>Description </b> {{comic?.description}} <br><br>
                     <b>Issue Number </b> {{comic?.issueNumber}} <br><br>
                     <b>Last modification </b> {{comic?.modified | date}} <br><br>
+                    <div class="div-block">
+                        <div class="div-flex"></div>
+                        <button mat-raised-button color="primary" *ngIf="!isItemInFavorites('comics', comic.id)"
+                            (click)="addFavoriteList('comics', comic)">
+                            Add to favorites list
+                        </button>
+                        <button mat-raised-button color="accent" *ngIf="isItemInFavorites('comics', comic.id)"
+                            (click)="removeFromFavoriteList('comics', comic.id)">
+                            Remove from favorites list
+                        </button>
+                    </div>
                     <mat-list>
                         <mat-divider></mat-divider>
                         <h2 mat-subheader>Stories</h2>

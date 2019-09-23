@@ -10,6 +10,15 @@
                     <b>Name </b>{{character?.name}} <br><br>
                     <b>Description </b> {{character?.description}} <br><br>
                     <b>Last modification </b> {{character?.modified | date}} <br><br>
+                    <div class="div-block">
+                        <div class="div-flex"></div>
+                        <button mat-raised-button color="primary" *ngIf="!isItemInFavorites('characters', character.id)" (click)="addFavoriteList('characters', character)">
+                            Add to favorites list
+                        </button>
+                        <button mat-raised-button color="accent" *ngIf="isItemInFavorites('characters', character.id)" (click)="removeFromFavoriteList('characters', character.id)">
+                            Remove from favorites list
+                        </button>
+                    </div>
                     <mat-list>
                         <mat-divider></mat-divider>
                         <h2 mat-subheader>Stories</h2>

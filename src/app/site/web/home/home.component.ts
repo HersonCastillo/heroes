@@ -57,7 +57,6 @@ export class HomeComponent implements AfterContentInit {
         }
         return '/assets/img/marvel.png';
     }
-
     addFavoriteList(key: string, object: any): void {
         Fn.addFavoriteItem(key, {
             id: object.id,

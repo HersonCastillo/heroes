@@ -52,7 +52,7 @@ export class CharacterDetailsComponent implements OnInit {
         return Fn.elipsis(str, ln);
     }
     showDescription(char: any, type: string): void {
-        switch(type){
+        switch (type) {
             case 'stories': {
                 this.fn.simple(char.title, char.description || 'No description yet');
                 break;
@@ -62,5 +62,21 @@ export class CharacterDetailsComponent implements OnInit {
                 break;
             }
         }
+    }
+    addFavoriteList(key: string, object: any): void {
+        Fn.addFavoriteItem(key, {
+            id: object.id,
+            name: object.name,
+            title: object.title,
+            description: object.description
+        });
+        this.fn.makeSnack('Item added to favorite list');
+    }
+    removeFromFavoriteList(key: string, id: any): void {
+        Fn.removeFavoriteItem(key, id);
+        this.fn.makeSnack('Item removed from favorite list');
+    }
+    isItemInFavorites(key: string, id: string): boolean {
+        return Fn.isItemInFavoriteList(key, id);
     }
 }

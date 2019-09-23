@@ -14,10 +14,11 @@ export class ComicsComponent implements OnInit, AfterContentInit {
 
     constructor(
         private comicProvider: ComicsService,
-        private scrollDispatcher: ScrollDispatcher
-    ){}
+        private scrollDispatcher: ScrollDispatcher,
+        private fn: Fn
+    ) { }
 
-    @ViewChild('scroll', null) 
+    @ViewChild('scroll', null)
     public scroll: CdkVirtualScrollViewport;
     public comics: Comic[] = [];
     public comicsClone: Comic[] = [];
@@ -99,5 +100,28 @@ export class ComicsComponent implements OnInit, AfterContentInit {
     }
     changeFilterType(value: number): void {
         this.filterTypeIndex = value;
+    }
+    addFavoriteList(key: string, object: any): void {
+        Fn.addFavoriteItem(key, {
+            id: object.id,
+            name: object.name,
+            title: object.title,
+            description: object.description
+        });
+    }
+    removeFromFavoriteList(key: string, id: any): void {
+        Fn.removeFavoriteItem(key, id);
+    }
+    isItemInFavorites(key: string, id: string): boolean {
+        return Fn.isItemInFavoriteList(key, id);
+    }
+    checkFavoriteList(key: string, object: any): void {
+        if (this.isItemInFavorites(key, object.id)) {
+            this.removeFromFavoriteList(key, object.id);
+            this.fn.makeSnack('Item removed from favorite list');
+        } else {
+            this.addFavoriteList(key, object);
+            this.fn.makeSnack('Item added to favorite list');
+        }
     }
 }

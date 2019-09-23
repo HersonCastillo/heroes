@@ -12,6 +12,17 @@
                     <b>Type </b> {{storie?.type}} <br><br>
                     <b>Last modification </b> {{storie?.modified | date}} <br><br>
                 </div>
+                <div class="div-block">
+                    <div class="div-flex"></div>
+                    <button mat-raised-button color="primary" *ngIf="!isItemInFavorites('stories', storie.id)"
+                        (click)="addFavoriteList('stories', storie)">
+                        Add to favorites list
+                    </button>
+                    <button mat-raised-button color="accent" *ngIf="isItemInFavorites('stories', storie.id)"
+                        (click)="removeFromFavoriteList('stories', storie.id)">
+                        Remove from favorites list
+                    </button>
+                </div>
             </div>
         </div>
         <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="28px" fxLayoutAlign="flex-start"
@@ -26,7 +37,8 @@
                     </mat-list-item>
                     <mat-list-item *ngFor="let character of characters">
                         <mat-icon mat-list-icon>book</mat-icon>
-                        <h4 mat-line (click)="showDescription(character, 'characters')" class="cursor-p">{{character.name}}</h4>
+                        <h4 mat-line (click)="showDescription(character, 'characters')" class="cursor-p">
+                            {{character.name}}</h4>
                         <p mat-line>{{elipsis(character.description, 50)}}</p>
                     </mat-list-item>
                 </mat-list>
