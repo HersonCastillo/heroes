@@ -27,7 +27,7 @@ export class StoryDetailsComponent implements OnInit {
             if (Fn.propertyExist(param, 'id')) {
                 let id = param['id'];
                 this.storieProvider.getStorie(id).subscribe(story => {
-                    if(story.code != 200){
+                    this.fn.handleErrorResponse(story, () => {
                         this.story = story.data.results[0];
                         this.storieProvider.getStoriesCharacters(this.story).subscribe(characters => {
                             this.characters = characters.data.results;
@@ -43,13 +43,7 @@ export class StoryDetailsComponent implements OnInit {
                             this.router.navigate(['/error', 'internal-error']);
                             this.fn.simple('Ups!', 'An error occurred when tried get data [Comics]');
                         });
-                    } else {
-                        if(story.code >= 400 && story.code < 500){
-                            this.router.navigate(['/error', 'not-found']);
-                        } else {
-                            this.router.navigate(['/error', 'internal-error']);
-                        }
-                    }
+                    }, null, null)
                 }, err => {
                     Fn.errLog(err);
                     this.router.navigate(['/error', 'internal-error']);

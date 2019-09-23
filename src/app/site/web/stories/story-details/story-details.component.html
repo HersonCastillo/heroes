@@ -3,23 +3,23 @@
         <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="28px" fxLayoutAlign="flex-start"
             class="container-wrap">
             <div fxFlex="0 1 calc(25% - 28px)" fxFlex.lt-md="0 1 calc(50% - 28px)" fxFlex.lt-sm="100%">
-                <img [src]="getImage(storie)" alt="character.name" class="full-w margin-x2 mat-elevation-z1">
+                <img [src]="getImage(story)" alt="character.name" class="full-w margin-x2 mat-elevation-z1">
             </div>
             <div fxFlex="0 1 calc(75% - 28px)" fxFlex.lt-md="0 1 calc(50% - 28px)" fxFlex.lt-sm="100%">
                 <div class="container-content">
-                    <b>Title </b>{{storie?.title}} <br><br>
-                    <b>Description </b> {{storie?.description}} <br><br>
-                    <b>Type </b> {{storie?.type}} <br><br>
-                    <b>Last modification </b> {{storie?.modified | date}} <br><br>
+                    <b>Title </b>{{story?.title}} <br><br>
+                    <b>Description </b> {{story?.description}} <br><br>
+                    <b>Type </b> {{story?.type}} <br><br>
+                    <b>Last modification </b> {{story?.modified | date}} <br><br>
                 </div>
                 <div class="div-block">
                     <div class="div-flex"></div>
                     <button mat-raised-button color="primary" *ngIf="!isItemInFavorites('stories', storie)"
-                        (click)="addFavoriteList('stories', storie)">
+                        (click)="addFavoriteList('stories', story)">
                         Add to favorites list
                     </button>
-                    <button mat-raised-button color="accent" *ngIf="isItemInFavorites('stories', storie)"
-                        (click)="removeFromFavoriteList('stories', storie)">
+                    <button mat-raised-button color="accent" *ngIf="isItemInFavorites('stories', story)"
+                        (click)="removeFromFavoriteList('stories', story)">
                         Remove from favorites list
                     </button>
                 </div>
