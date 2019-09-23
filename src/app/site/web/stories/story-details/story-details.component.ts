@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Character } from 'src/app/interfaces/character';
 import { Story } from 'src/app/interfaces/story';
 import { Comic } from 'src/app/interfaces/comic';
+import { ServerResponse } from 'src/app/interfaces/server-response';
 import { Fn } from 'src/app/utils/fn';
 
 @Component({

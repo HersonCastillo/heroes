@@ -29,21 +29,23 @@ export class ComicDetailsComponent implements OnInit {
             if (Fn.propertyExist(param, 'id')) {
                 let id = param['id'];
                 this.comicProvider.getComic(id).subscribe(comic => {
-                    this.comic = comic.data.results[0];
-                    this.comicProvider.getComicsCharacters(this.comic).subscribe(characters => {
-                        this.characters = characters.data.results;
-                    }, err => {
-                        Fn.errLog(err);
-                        this.router.navigate(['/error', 'not-found']);
-                        this.fn.simple('Ups!', 'An error occurred when tried get data [Characters]');
-                    });
-                    this.comicProvider.getComicsStories(this.comic).subscribe(stories => {
-                        this.stories = stories.data.results;
-                    }, err => {
-                        Fn.errLog(err);
-                        this.router.navigate(['/error', 'internal-error']);
-                        this.fn.simple('Ups!', 'An error occurred when tried get data [Stories]');
-                    });
+                    this.fn.handleErrorResponse(comic, () => {
+                        this.comic = comic.data.results[0];
+                        this.comicProvider.getComicsCharacters(this.comic).subscribe(characters => {
+                            this.characters = characters.data.results;
+                        }, err => {
+                            Fn.errLog(err);
+                            this.router.navigate(['/error', 'not-found']);
+                            this.fn.simple('Ups!', 'An error occurred when tried get data [Characters]');
+                        });
+                        this.comicProvider.getComicsStories(this.comic).subscribe(stories => {
+                            this.stories = stories.data.results;
+                        }, err => {
+                            Fn.errLog(err);
+                            this.router.navigate(['/error', 'internal-error']);
+                            this.fn.simple('Ups!', 'An error occurred when tried get data [Stories]');
+                        });
+                    }, null, null);
                 }, err => {
                     Fn.errLog(err);
                     this.router.navigate(['/error', 'internal-error']);
@@ -85,13 +87,13 @@ export class ComicDetailsComponent implements OnInit {
         this.fn.makeSnack('Item added to favorite list');
     }
     removeFromFavoriteList(key: string, object: any): void {
-        if(Fn.propertyExist(object, 'id')){
+        if (Fn.propertyExist(object, 'id')) {
             Fn.removeFavoriteItem(key, object.id);
             this.fn.makeSnack('Item removed from favorite list');
         }
     }
     isItemInFavorites(key: string, object: any): boolean {
-        if(Fn.propertyExist(object, 'id')){
+        if (Fn.propertyExist(object, 'id')) {
             return Fn.isItemInFavoriteList(key, object.id);
         }
         return false;
