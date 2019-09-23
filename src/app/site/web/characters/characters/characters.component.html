@@ -2,10 +2,10 @@
     <mat-toolbar class="container-wrap-title mat-elevation-z2">
         <span>Most powerful characters</span>
         <div class="div-flex"></div>
-        <button mat-raised-button *ngIf="isUpp" (click)="changeOrder()">
+        <button mat-raised-button *ngIf="isUpp" (click)="changeOrder()" [disabled]="!isLoaded">
             Order by: name (ascend)
         </button>
-        <button mat-raised-button *ngIf="!isUpp" (click)="changeOrder()">
+        <button mat-raised-button *ngIf="!isUpp" (click)="changeOrder()" [disabled]="!isLoaded">
             Order by: name (descend)
         </button>
     </mat-toolbar>
@@ -24,6 +24,7 @@
             </mat-select>
         </mat-form-field>
     </div>
+    <mat-progress-bar mode="indeterminate" class="full-w margin-bottom-x1" *ngIf="!isLoaded"></mat-progress-bar>
     <div class="txt-center full-w" *ngIf="characters.length == 0">
         <span>No records found</span>
     </div>

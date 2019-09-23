@@ -37,29 +37,32 @@ export class CharactersComponent implements OnInit, AfterContentInit {
         this.withScroll(false, true);
     }
     withScroll(scroll: boolean, ascend: boolean): void {
-        if (scroll) this.isLoadScroll = true;
-        else this.isLoaded = false;
-        this.characterProvider.getCharacters(this.pagination.limit, this.pagination.offset, ascend).subscribe(response => {
-            this.characters = response.data.results;
-            this.charactersClone = this.characters;
-            if (scroll) {
-                this.isLoadScroll = false;
-                this.scroll.scrollToIndex(this.characters.length - 1, "smooth");
-            } else {
-                this.isLoaded = true;
-            }
-        });
+        if ((this.pagination.limit - this.pagination.offset) > 100) {
+            this.fn.makeSnack("You cannot make more than 100 requests");
+            do {
+                this.pagination.limit -= 6;
+            } while((this.pagination.limit - this.pagination.offset) > 100);
+        } else {
+            if (scroll) this.isLoadScroll = true;
+            else this.isLoaded = false;
+            this.characterProvider.getCharacters(this.pagination.limit, this.pagination.offset, ascend).subscribe(response => {
+                this.characters = response.data.results;
+                this.charactersClone = this.characters;
+                if (scroll) {
+                    this.isLoadScroll = false;
+                    this.scroll.scrollToIndex(this.characters.length - 1, "smooth");
+                } else {
+                    this.isLoaded = true;
+                }
+            });
+        }
     }
     ngAfterContentInit() {
         this.scrollDispatcher.scrolled().pipe(
             filter(() => this.scroll.measureScrollOffset('bottom') === 0)
         ).subscribe(() => {
             this.pagination.limit += 6;
-            if ((this.pagination.limit - this.pagination.offset) > 100) {
-                this.fn.makeSnack("You cannot make more than 100 requests");
-            } else {
-                this.withScroll(true, this.isUpp);
-            }
+            this.withScroll(true, this.isUpp);
         });
     }
     elipsis(str: string, ln: number): string {
