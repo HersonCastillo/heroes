@@ -1,0 +1,32 @@
+<div class="container-content">
+    <mat-toolbar class="container-wrap-title mat-elevation-z2">
+        <span>Best entertainment stories</span>
+    </mat-toolbar>
+    <mat-progress-bar mode="indeterminate" class="full-w margin-bottom-x1" *ngIf="!isLoaded"></mat-progress-bar>
+    <div class="txt-center full-w" *ngIf="stories.length == 0">
+        <span>No records found</span>
+    </div>
+    <cdk-virtual-scroll-viewport [itemSize]="0" class="vs-viewport" #scroll>
+        <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="28px" fxLayoutAlign="flex-start"
+            class="container-wrap">
+            <ng-template *cdkVirtualFor="let storie of stories" [ngIf]="true">
+                <mat-card fxFlex="0 1 calc(16% - 28px)" fxFlex.lt-md="0 1 calc(50% - 28px)" fxFlex.lt-sm="100%"
+                    class="mat-elevation-z4 card-content" [routerLink]="['/stories', 'details', storie.id]">
+                    <mat-card-header>
+                        <mat-card-title>
+                            {{elipsis(storie.title, 10)}}
+                        </mat-card-title>
+                    </mat-card-header>
+                    <img mat-card-image [src]="getImage(storie)" [alt]="storie.title" style="height: 245px;">
+                </mat-card>
+            </ng-template>
+        </div>
+    </cdk-virtual-scroll-viewport>
+    <div class="loading-data float-container" *ngIf="isLoadScroll">
+        <div class="div-block">
+            <div class="div-flex"></div>
+            <mat-progress-spinner mode="indeterminate" diameter="20"></mat-progress-spinner>
+            <span>Loading data...</span>
+        </div>
+    </div>
+</div>

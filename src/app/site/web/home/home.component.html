@@ -54,13 +54,13 @@
             <br>
         </mat-tab>
         <mat-tab label="Stories">
-                <!--Stores-->
+                <!--Stories-->
                 <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start"
                     class="container-wrap">
                     <mat-toolbar class="container-wrap-title mat-elevation-z2">
                         <span>Best entertainment stories</span>
                         <div class="div-flex"></div>
-                        <button mat-stroked-button color="primary">
+                        <button mat-stroked-button color="primary" [routerLink]="['/stories']">
                             More information
                         </button>
                     </mat-toolbar>

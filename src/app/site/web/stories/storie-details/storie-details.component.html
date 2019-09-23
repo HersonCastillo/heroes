@@ -1,0 +1,45 @@
+<div class="container-content">
+    <div class="mat-card">
+        <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="28px" fxLayoutAlign="flex-start"
+            class="container-wrap">
+            <div fxFlex="0 1 calc(25% - 28px)" fxFlex.lt-md="0 1 calc(50% - 28px)" fxFlex.lt-sm="100%">
+                <img [src]="getImage(storie)" alt="character.name" class="full-w margin-x2 mat-elevation-z1">
+            </div>
+            <div fxFlex="0 1 calc(75% - 28px)" fxFlex.lt-md="0 1 calc(50% - 28px)" fxFlex.lt-sm="100%">
+                <div class="container-content">
+                    <b>Title </b>{{storie?.title}} <br><br>
+                    <b>Description </b> {{storie?.description}} <br><br>
+                    <b>Type </b> {{storie?.type}} <br><br>
+                    <b>Last modification </b> {{storie?.modified | date}} <br><br>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="28px" fxLayoutAlign="flex-start"
+            class="container-wrap">
+            <div fxFlex="0 1 calc(50% - 28px)" fxFlex.lt-md="0 1 calc(50% - 28px)" fxFlex.lt-sm="100%">
+                <mat-list>
+                    <mat-divider></mat-divider>
+                    <h2 mat-subheader>Stories</h2>
+                    <mat-divider></mat-divider>
+                    <mat-list-item *ngFor="let character of characters">
+                        <mat-icon mat-list-icon>book</mat-icon>
+                        <h4 mat-line>{{character.name}}</h4>
+                        <p mat-line>{{elipsis(character.description, 50)}}</p>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+            <div fxFlex="0 1 50%" fxFlex.lt-md="0 1 50%" fxFlex.lt-sm="100%">
+                <mat-list>
+                    <mat-divider></mat-divider>
+                    <h2 mat-subheader>Comics</h2>
+                    <mat-divider></mat-divider>
+                    <mat-list-item *ngFor="let comic of comics">
+                        <mat-icon mat-list-icon>person</mat-icon>
+                        <h4 mat-line>{{comic.title}}</h4>
+                        <p mat-line>{{elipsis(comic.description, 50)}}</p>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </div>
+    </div>
+</div>

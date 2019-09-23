@@ -38,7 +38,7 @@ export class HomeComponent implements AfterContentInit {
             this.characters = response.data.results.slice(0, 6);
             this.isLoadedModules.characters = true;
         });
-        this.comicProvider.getComics(12, 0).subscribe(response => {
+        this.comicProvider.getComics(12, 0, true).subscribe(response => {
             this.comics = response.data.results.slice(0, 6);
             this.isLoadedModules.comics = true;
         });
