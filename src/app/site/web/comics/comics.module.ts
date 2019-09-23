@@ -2,22 +2,29 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { ComicsComponent } from './comics/comics.component';
+import { ComicDetailsComponent } from './comic-details/comic-details.component';
+import { MaterialModule } from 'src/app/material.module';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
     {
-        path: '', component: ComicsComponent, children: [
-            { path: 'characters' },
-            { path: 'stories' }
+        path: '', children: [
+            { path: '', component: ComicsComponent },
+            { path: 'details/:id', component: ComicDetailsComponent }
         ]
-    },
-    { path: '**', redirectTo: '', pathMatch: 'full' }
+    }
 ];
 
 @NgModule({
-    declarations: [ComicsComponent],
+    declarations: [ComicsComponent, ComicDetailsComponent],
     imports: [
         CommonModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        MaterialModule,
+        ScrollingModule,
+        FormsModule,
+        ReactiveFormsModule
     ]
 })
 export class ComicsModule { }

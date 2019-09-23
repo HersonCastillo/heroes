@@ -1,38 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { CharactersService } from 'src/app/services/characters.service';
+import { ComicsService } from 'src/app/services/comics.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Fn } from 'src/app/utils/fn';
 import { Character } from 'src/app/interfaces/character';
 import { Storie } from 'src/app/interfaces/storie';
 import { Comic } from 'src/app/interfaces/comic';
+import { Fn } from 'src/app/utils/fn';
+import { ComicsComponent } from '../comics/comics.component';
 
 @Component({
-    selector: 'app-character-details',
-    templateUrl: './character-details.component.html',
-    styleUrls: ['./character-details.component.scss']
+    selector: 'app-comic-details',
+    templateUrl: './comic-details.component.html',
+    styleUrls: ['./comic-details.component.scss']
 })
-export class CharacterDetailsComponent implements OnInit {
+export class ComicDetailsComponent implements OnInit {
 
     constructor(
-        private characterProvider: CharactersService,
+        private comicProvider: ComicsService,
         private route: ActivatedRoute,
         private router: Router
-    ) { }
+    ){}
 
-    public character: Character;
+    public characters: Character[] = [];
     public stories: Storie[] = [];
-    public comics: Comic[] = [];
+    public comic: Comic;
 
     ngOnInit() {
         this.route.params.subscribe(param => {
             if (Fn.propertyExist(param, 'id')) {
                 let id = param['id'];
-                this.characterProvider.getCharacter(id).subscribe(character => {
-                    this.character = character.data.results[0];
-                    this.characterProvider.getCharactersComics(this.character).subscribe(comics => {
-                        this.comics = comics.data.results;
+                this.comicProvider.getComic(id).subscribe(comic => {
+                    this.comic = comic.data.results[0];
+                    this.comicProvider.getComicsCharacters(this.comic).subscribe(characters => {
+                        this.characters = characters.data.results;
                     });
-                    this.characterProvider.getCharactersStories(this.character).subscribe(stories => {
+                    this.comicProvider.getComicsStories(this.comic).subscribe(stories => {
                         this.stories = stories.data.results;
                     });
                 });

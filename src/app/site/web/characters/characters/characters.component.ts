@@ -14,11 +14,11 @@ export class CharactersComponent implements OnInit, AfterContentInit {
 
     constructor(
         private characterProvider: CharactersService,
-        private scrollDispatcher: ScrollDispatcher,
-        private fn: Fn
+        private scrollDispatcher: ScrollDispatcher
     ) { }
 
-    @ViewChild('scroll', null) public scroll: CdkVirtualScrollViewport;
+    @ViewChild('scroll', null) 
+    public scroll: CdkVirtualScrollViewport;
     public characters: Character[] = [];
     public charactersClone: Character[] = [];
     public isLoadScroll: boolean = false;
