@@ -38,7 +38,7 @@ export class ComicsService {
         this.paginationStore.limit = limit;
         this.paginationStore.offset = offset;
         this.paginationStore.orderBy = ascending ? 'issueNumber' : '-issueNumber';
-        return this.http.get<ServerResponse<Comic>>(this.path).pipe(map(l => l), tap(l => this._comics = l));
+        return this.http.get<ServerResponse<Comic>>(`${this.path}&limit=${limit}&offset=${offset}&orderBy=${this.paginationStore.orderBy}`).pipe(map(l => l), tap(l => this._comics = l));
     }
     public getComic(id: string): Observable<ServerResponse<Comic>>{
         if(this._comic != null && this._id == id) return of(this._comic);

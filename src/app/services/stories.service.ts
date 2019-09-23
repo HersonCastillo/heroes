@@ -29,7 +29,7 @@ export class StoriesService {
         if(this._stories != null && this.paginationStore.limit == limit && this.paginationStore.offset == offset) return of(this._stories);
         this.paginationStore.limit = limit;
         this.paginationStore.offset = offset;
-        return this.http.get<ServerResponse<Story>>(this.path).pipe(map(l => l), tap(l => this._stories = l));
+        return this.http.get<ServerResponse<Story>>(`${this.path}&limit=${limit}&offset=${offset}`).pipe(map(l => l), tap(l => this._stories = l));
     }
     public getStorie(id: string): Observable<ServerResponse<Story>> {
         if(this._story != null && this._id == id) {
