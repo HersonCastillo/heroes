@@ -1,6 +1,6 @@
 export const API = {
     rest: {
-        baseurl: 'http://gateway.marvel.com/v1/public',
+        baseurl: 'https://gateway.marvel.com/v1/public',
         user: {
             name: 'herson8827800',
             key: {
